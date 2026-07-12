@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>캠핑 중간지점 검색기</title>
+    <meta
+      name="description"
+      content="서울, 광명, 대전, 하남 출발자가 함께 모이기 좋은 캠핑장을 이동시간과 예약 확인 상태로 비교합니다."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div>
+        <p class="eyebrow">Camping Meetup Finder</p>
+        <h1>캠핑 중간지점 검색기</h1>
+      </div>
+      <div class="date-badge">
+        <span>기본 일정</span>
+        <strong>2026.07.18 토 - 07.19 일</strong>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="panel controls" aria-label="검색 조건">
+        <section>
+          <h2>출발지</h2>
+          <div id="originList" class="origin-list"></div>
+          <button id="addOrigin" class="secondary-button" type="button">+ 출발지 추가</button>
+        </section>
+
+        <section class="field-grid">
+          <label>
+            체크인
+            <input id="checkin" type="date" value="2026-07-18" />
+          </label>
+          <label>
+            체크아웃
+            <input id="checkout" type="date" value="2026-07-19" />
+          </label>
+        </section>
+
+        <section>
+          <h2>우선순위</h2>
+          <div class="segmented" role="group" aria-label="정렬 기준">
+            <button class="active" type="button" data-sort="balance">이동시간 균형</button>
+            <button type="button" data-sort="maxTime">최장 이동시간</button>
+            <button type="button" data-sort="available">예약 가능 우선</button>
+          </div>
+        </section>
+
+        <section>
+          <h2>필터</h2>
+          <label class="checkbox-row">
+            <input id="availableOnly" type="checkbox" />
+            예약 가능 확인된 곳만 보기
+          </label>
+          <label>
+            최대 이동시간
+            <select id="maxTime">
+              <option value="999">제한 없음</option>
+              <option value="90">90분 이내</option>
+              <option value="120" selected>120분 이내</option>
+              <option value="150">150분 이내</option>
+            </select>
+          </label>
+        </section>
+
+        <section class="note">
+          <h2>예약현황 안내</h2>
+          <p>
+            예약 가능 여부는 사이트마다 실시간 공개 방식이 달라 자동 조회가 막힐 수 있습니다.
+            이 페이지는 후보를 빠르게 좁히고 공식 예약 페이지에서 확인하도록 설계했습니다.
+          </p>
+        </section>
+      </aside>
+
+      <section class="results-area" aria-label="검색 결과">
+        <div class="toolbar">
+          <div>
+            <p id="resultCount" class="result-count"></p>
+            <p id="summary" class="summary"></p>
+          </div>
+          <div class="toolbar-actions">
+            <button id="resetButton" class="secondary-button" type="button">초기화</button>
+            <button id="shareButton" class="primary-button" type="button">검색조건 복사</button>
+          </div>
+        </div>
+        <div id="results" class="results"></div>
+      </section>
+    </main>
+
+    <template id="originTemplate">
+      <div class="origin-row">
+        <input class="origin-input" type="text" />
+        <button class="icon-button remove-origin" type="button" aria-label="출발지 삭제">×</button>
+      </div>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
